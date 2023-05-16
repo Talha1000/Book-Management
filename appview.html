@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Display API Data Example</title>
+</head>
+<body>
+  <h1>Display API Data Example</h1>
+  
+  <div id="book-list"></div>
+
+  <script>
+    // Fetch the API data
+    fetch("http://localhost/BookManagementSystem/api.php")
+      .then(response => response.json())
+      .then(data => {
+        // Iterate over the data and generate HTML for each book
+        const bookList = document.getElementById("book-list");
+
+        data.forEach(book => {
+          const bookElement = document.createElement("div");
+          bookElement.innerHTML = `
+            <h3>Title: ${book.title}</h3>
+            <p>Author: ${book.author}</p>
+            <p>Year: ${book.year}</p>
+            <hr>
+          `;
+          bookList.appendChild(bookElement);
+        });
+      })
+      .catch(error => console.error(error));
+  </script>
+</body>
+</html>
